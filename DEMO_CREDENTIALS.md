@@ -1,4 +1,4 @@
-# 🔐 HoteliaSEM - Comptes de démonstration
+# 🔐 HoteliaSEM - Comptes de démonstration ***
 
 Ce document liste tous les comptes utilisateur de test disponibles pour la plateforme HoteliaSEM. Utilisez ces identifiants pour tester les différents niveaux d'accès et fonctionnalités.
 

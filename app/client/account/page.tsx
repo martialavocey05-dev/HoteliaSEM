@@ -9,16 +9,33 @@ import { HSEMLogo } from '@/components/hsem-logo'
 import { Calendar, CreditCard, Heart, LogOut, Settings, User } from 'lucide-react'
 
 export default function ClientAccountPage() {
-  const { user, isAuthenticated, logout } = useAuth()
+  const { user, isAuthenticated, isLoading, logout } = useAuth()
   const router = useRouter()
 
   useEffect(() => {
+    console.log('[v0] ClientAccount: Auth state', { isAuthenticated, isLoading, userRole: user?.role })
+    if (isLoading) {
+      return
+    }
     if (!isAuthenticated) {
+      console.log('[v0] ClientAccount: Not authenticated, redirecting to login')
       router.push('/login')
     } else if (user?.role !== 'client') {
+      console.log('[v0] ClientAccount: Wrong role, redirecting to home')
       router.push('/')
     }
-  }, [isAuthenticated, user, router])
+  }, [isAuthenticated, isLoading, user, router])
+
+  if (isLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background">
+        <div className="text-center">
+          <HSEMLogo size="md" animated />
+          <p className="mt-4 text-hsem-gold">Chargement...</p>
+        </div>
+      </div>
+    )
+  }
 
   if (!user || user.role !== 'client') {
     return null

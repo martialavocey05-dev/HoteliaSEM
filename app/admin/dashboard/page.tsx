@@ -19,16 +19,33 @@ import {
 import { getUsersByRole } from '@/lib/mock-data/users'
 
 export default function AdminDashboardPage() {
-  const { user, isAuthenticated, logout } = useAuth()
+  const { user, isAuthenticated, isLoading, logout } = useAuth()
   const router = useRouter()
 
   useEffect(() => {
+    console.log('[v0] AdminDashboard: Auth state', { isAuthenticated, isLoading, userRole: user?.role })
+    if (isLoading) {
+      return
+    }
     if (!isAuthenticated) {
+      console.log('[v0] AdminDashboard: Not authenticated, redirecting to login')
       router.push('/login')
     } else if (user?.role !== 'admin') {
+      console.log('[v0] AdminDashboard: Wrong role, redirecting to home')
       router.push('/')
     }
-  }, [isAuthenticated, user, router])
+  }, [isAuthenticated, isLoading, user, router])
+
+  if (isLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background">
+        <div className="text-center">
+          <HSEMLogo size="md" animated />
+          <p className="mt-4 text-hsem-gold">Chargement...</p>
+        </div>
+      </div>
+    )
+  }
 
   if (!user || user.role !== 'admin') {
     return null

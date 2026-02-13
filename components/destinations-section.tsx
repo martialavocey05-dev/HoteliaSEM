@@ -56,13 +56,13 @@ export function DestinationsSection() {
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         {/* Header */}
         <div className="mb-16 text-center">
-          <span className="mb-4 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-primary">
+          <span className="mb-4 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-hsem-gold">
             Destinations Exclusives
           </span>
-          <h2 className="mb-4 font-serif text-3xl font-bold text-foreground md:text-5xl text-balance">
+          <h2 className="mb-4 font-serif text-3xl font-bold text-hsem-alabaster md:text-5xl text-balance">
             Les Joyaux du Cameroun
           </h2>
-          <p className="mx-auto max-w-2xl text-muted-foreground text-pretty">
+          <p className="mx-auto max-w-2xl text-hsem-silver/70 text-pretty">
             Explorez notre selection curatee des meilleurs etablissements dans les villes
             les plus prestigieuses du pays.
           </p>
@@ -88,8 +88,8 @@ export function DestinationsSection() {
 
                 {/* City badge */}
                 <div className="absolute left-4 top-4 flex items-center gap-1.5 rounded-full bg-hsem-navy/70 px-3 py-1.5 backdrop-blur-sm">
-                  <MapPin className="h-3.5 w-3.5 text-primary" />
-                  <span className="text-xs font-semibold text-foreground">
+                  <MapPin className="h-3.5 w-3.5 text-hsem-gold" />
+                  <span className="text-xs font-semibold text-hsem-alabaster">
                     {dest.city}
                   </span>
                 </div>
@@ -103,10 +103,10 @@ export function DestinationsSection() {
 
               {/* Content */}
               <div className="p-6">
-                <h3 className="mb-2 font-serif text-xl font-bold text-foreground">
+                <h3 className="mb-2 font-serif text-xl font-bold text-hsem-alabaster">
                   {dest.hotel}
                 </h3>
-                <p className="mb-4 text-sm leading-relaxed text-muted-foreground/70">
+                <p className="mb-4 text-sm leading-relaxed text-hsem-silver/70">
                   {dest.description}
                 </p>
 
@@ -117,8 +117,8 @@ export function DestinationsSection() {
                       key={feat.label}
                       className="flex items-center gap-1.5 rounded-full border border-hsem-silver/10 bg-hsem-navy/40 px-3 py-1"
                     >
-                      <feat.icon className="h-3 w-3 text-primary" />
-                      <span className="text-[11px] text-muted-foreground/80">{feat.label}</span>
+                      <feat.icon className="h-3 w-3 text-hsem-gold" />
+                      <span className="text-[11px] text-hsem-silver/80">{feat.label}</span>
                     </div>
                   ))}
                 </div>
@@ -126,15 +126,15 @@ export function DestinationsSection() {
                 {/* Price and CTA */}
                 <div className="flex items-end justify-between border-t border-hsem-silver/10 pt-4">
                   <div>
-                    <span className="text-xs text-muted-foreground/60">A partir de</span>
+                    <span className="text-xs text-hsem-silver/60">A partir de</span>
                     <div className="flex items-baseline gap-1">
-                      <span className="font-serif text-2xl font-bold text-primary">
+                      <span className="font-serif text-2xl font-bold text-hsem-gold">
                         {dest.price}
                       </span>
-                      <span className="text-xs text-muted-foreground/60">XAF/nuit</span>
+                      <span className="text-xs text-hsem-silver/60">XAF/nuit</span>
                     </div>
                   </div>
-                  <button className="animate-golden-shimmer relative overflow-hidden rounded-full bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground transition-all hover:shadow-lg hover:shadow-primary/20 hover:scale-105">
+                  <button className="animate-golden-shimmer relative overflow-hidden rounded-full bg-hsem-gold px-5 py-2.5 text-sm font-bold text-hsem-navy transition-all hover:shadow-lg hover:shadow-hsem-gold/20">
                     Reserver
                   </button>
                 </div>

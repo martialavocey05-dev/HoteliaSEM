@@ -68,14 +68,14 @@ export default function RegisterPage() {
       <div className="absolute inset-0 bg-[url('/images/hero-hotel.jpg')] bg-cover bg-center opacity-5" />
 
       <div className="relative flex min-h-screen items-center justify-center px-4 py-12">
-        <Card className="glass-card w-full max-w-md border-border/50">
+        <Card className="glass-card w-full max-w-md border-hsem-silver/20">
           <CardHeader className="space-y-4 text-center">
             <div className="mx-auto flex justify-center">
               <HSEMLogo size="md" animated />
             </div>
             <div>
-              <CardTitle className="font-serif text-3xl text-primary">Inscription</CardTitle>
-              <CardDescription className="mt-2 text-muted-foreground">
+              <CardTitle className="font-serif text-3xl text-hsem-gold">Inscription</CardTitle>
+              <CardDescription className="mt-2 text-hsem-alabaster/70">
                 Créez votre compte HoteliaSEM
               </CardDescription>
             </div>
@@ -92,7 +92,7 @@ export default function RegisterPage() {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="firstName" className="text-foreground">
+                  <Label htmlFor="firstName" className="text-hsem-alabaster">
                     Prénom
                   </Label>
                   <div className="relative">
@@ -102,14 +102,14 @@ export default function RegisterPage() {
                       placeholder="Jean"
                       value={formData.firstName}
                       onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                      className="border-border bg-muted pl-10 text-foreground"
+                      className="border-hsem-silver/20 bg-hsem-navy/40 pl-10 text-hsem-alabaster"
                       required
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="lastName" className="text-foreground">
+                  <Label htmlFor="lastName" className="text-hsem-alabaster">
                     Nom
                   </Label>
                   <Input
@@ -117,14 +117,14 @@ export default function RegisterPage() {
                     placeholder="Dupont"
                     value={formData.lastName}
                     onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                    className="border-border bg-muted text-foreground"
+                    className="border-hsem-silver/20 bg-hsem-navy/40 text-hsem-alabaster"
                     required
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-foreground">
+                <Label htmlFor="email" className="text-hsem-alabaster">
                   Email
                 </Label>
                 <div className="relative">
@@ -135,14 +135,14 @@ export default function RegisterPage() {
                     placeholder="votre@email.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="border-border bg-muted pl-10 text-foreground"
+                    className="border-hsem-silver/20 bg-hsem-navy/40 pl-10 text-hsem-alabaster"
                     required
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="phone" className="text-foreground">
+                <Label htmlFor="phone" className="text-hsem-alabaster">
                   Téléphone
                 </Label>
                 <div className="relative">
@@ -153,14 +153,14 @@ export default function RegisterPage() {
                     placeholder="+237 6XX XXX XXX"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="border-border bg-muted pl-10 text-foreground"
+                    className="border-hsem-silver/20 bg-hsem-navy/40 pl-10 text-hsem-alabaster"
                     required
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="role" className="text-foreground">
+                <Label htmlFor="role" className="text-hsem-alabaster">
                   Type de compte
                 </Label>
                 <div className="relative">
@@ -169,14 +169,14 @@ export default function RegisterPage() {
                     value={formData.role}
                     onValueChange={(value: UserRole) => setFormData({ ...formData, role: value })}
                   >
-                    <SelectTrigger className="border-border bg-muted pl-10 text-foreground">
+                    <SelectTrigger className="border-hsem-silver/20 bg-hsem-navy/40 pl-10 text-hsem-alabaster">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent className="border-border bg-card">
-                      <SelectItem value="client" className="text-foreground">
+                    <SelectContent className="border-hsem-silver/20 bg-hsem-navy/95">
+                      <SelectItem value="client" className="text-hsem-alabaster">
                         Client
                       </SelectItem>
-                      <SelectItem value="hotelier" className="text-foreground">
+                      <SelectItem value="hotelier" className="text-hsem-alabaster">
                         Hôtelier / Partenaire
                       </SelectItem>
                     </SelectContent>
@@ -185,7 +185,7 @@ export default function RegisterPage() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="password" className="text-foreground">
+                <Label htmlFor="password" className="text-hsem-alabaster">
                   Mot de passe
                 </Label>
                 <div className="relative">
@@ -196,13 +196,13 @@ export default function RegisterPage() {
                     placeholder="••••••••"
                     value={formData.password}
                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                    className="border-border bg-muted pl-10 pr-10 text-foreground"
+                    className="border-hsem-silver/20 bg-hsem-navy/40 pl-10 pr-10 text-hsem-alabaster"
                     required
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-3 text-muted-foreground hover:text-primary"
+                    className="absolute right-3 top-3 text-hsem-silver/50 hover:text-hsem-gold"
                   >
                     {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                   </button>
@@ -210,7 +210,7 @@ export default function RegisterPage() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="confirmPassword" className="text-foreground">
+                <Label htmlFor="confirmPassword" className="text-hsem-alabaster">
                   Confirmer le mot de passe
                 </Label>
                 <div className="relative">
@@ -221,7 +221,7 @@ export default function RegisterPage() {
                     placeholder="••••••••"
                     value={formData.confirmPassword}
                     onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                    className="border-border bg-muted pl-10 text-foreground"
+                    className="border-hsem-silver/20 bg-hsem-navy/40 pl-10 text-hsem-alabaster"
                     required
                   />
                 </div>
@@ -229,7 +229,7 @@ export default function RegisterPage() {
 
               <Button
                 type="submit"
-                className="w-full bg-primary font-semibold text-primary-foreground hover:bg-primary/90 hover:scale-105 transition-transform"
+                className="w-full bg-hsem-gold font-semibold text-hsem-navy hover:bg-hsem-gold/90"
                 disabled={isLoading}
               >
                 {isLoading ? 'Inscription...' : 'Créer mon compte'}
@@ -237,16 +237,16 @@ export default function RegisterPage() {
             </form>
           </CardContent>
 
-          <CardFooter className="flex-col space-y-2 border-t border-border/50 pt-6">
-            <p className="text-center text-sm text-muted-foreground">
+          <CardFooter className="flex-col space-y-2 border-t border-hsem-silver/10 pt-6">
+            <p className="text-center text-sm text-hsem-alabaster/70">
               Déjà un compte ?{' '}
-              <Link href="/login" className="font-semibold text-primary transition-colors hover:text-primary/80">
+              <Link href="/login" className="font-semibold text-hsem-gold transition-colors hover:text-hsem-gold/80">
                 Se connecter
               </Link>
             </p>
             <Link
               href="/"
-              className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+              className="text-xs text-hsem-silver/60 transition-colors hover:text-hsem-silver"
             >
               ← Retour à l'accueil
             </Link>

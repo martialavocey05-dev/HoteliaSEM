@@ -27,7 +27,7 @@ const footerLinks = {
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-border bg-accent" role="contentinfo">
+    <footer className="relative border-t border-hsem-silver/10 bg-hsem-deep" role="contentinfo">
       <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-5">
           {/* Brand */}
@@ -35,30 +35,30 @@ export function Footer() {
             <div className="mb-6 flex items-center gap-3">
               <HSEMLogo size="md" animated={false} />
               <div>
-                <span className="font-serif text-xl font-bold text-primary">
+                <span className="font-serif text-xl font-bold text-hsem-gold">
                   HoteliaSEM
                 </span>
-                <p className="text-xs uppercase tracking-widest text-muted-foreground">
+                <p className="text-xs uppercase tracking-widest text-hsem-silver/50">
                   Luxe & Excellence
                 </p>
               </div>
             </div>
-            <p className="mb-6 max-w-sm text-sm leading-relaxed text-muted-foreground">
+            <p className="mb-6 max-w-sm text-sm leading-relaxed text-hsem-silver/60">
               La premiere plateforme hoteliere de luxe au Cameroun. Intelligence
               artificielle, immersion 3D et service Premium pour des experiences
               inoubliables.
             </p>
-            <div className="flex flex-col gap-3 text-sm text-muted-foreground">
+            <div className="flex flex-col gap-3 text-sm text-hsem-silver/50">
               <div className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-primary/60" />
+                <MapPin className="h-4 w-4 text-hsem-gold/60" />
                 Douala, Cameroun
               </div>
               <div className="flex items-center gap-2">
-                <Phone className="h-4 w-4 text-primary/60" />
+                <Phone className="h-4 w-4 text-hsem-gold/60" />
                 +237 6XX XXX XXX
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="h-4 w-4 text-primary/60" />
+                <Mail className="h-4 w-4 text-hsem-gold/60" />
                 contact@hoteliasem.com
               </div>
             </div>
@@ -66,7 +66,7 @@ export function Footer() {
 
           {/* Links */}
           <div>
-            <h4 className="mb-4 text-sm font-bold uppercase tracking-wider text-foreground">
+            <h4 className="mb-4 text-sm font-bold uppercase tracking-wider text-hsem-alabaster">
               Plateforme
             </h4>
             <ul className="flex flex-col gap-2.5">
@@ -74,7 +74,7 @@ export function Footer() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                    className="text-sm text-hsem-silver/50 transition-colors hover:text-hsem-gold"
                   >
                     {link.label}
                   </a>
@@ -84,7 +84,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-4 text-sm font-bold uppercase tracking-wider text-foreground">
+            <h4 className="mb-4 text-sm font-bold uppercase tracking-wider text-hsem-alabaster">
               Partenaires
             </h4>
             <ul className="flex flex-col gap-2.5">
@@ -92,7 +92,7 @@ export function Footer() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                    className="text-sm text-hsem-silver/50 transition-colors hover:text-hsem-gold"
                   >
                     {link.label}
                   </a>
@@ -102,7 +102,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-4 text-sm font-bold uppercase tracking-wider text-foreground">
+            <h4 className="mb-4 text-sm font-bold uppercase tracking-wider text-hsem-alabaster">
               Legal
             </h4>
             <ul className="flex flex-col gap-2.5">
@@ -110,7 +110,7 @@ export function Footer() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                    className="text-sm text-hsem-silver/50 transition-colors hover:text-hsem-gold"
                   >
                     {link.label}
                   </a>
@@ -121,12 +121,12 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border/50 pt-8 md:flex-row">
-          <p className="text-xs text-muted-foreground/70">
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-hsem-silver/8 pt-8 md:flex-row">
+          <p className="text-xs text-hsem-silver/40">
             2026 HoteliaSEM. Tous droits reserves. Plateforme Hoteliere de Luxe au
             Cameroun.
           </p>
-          <div className="flex items-center gap-2 text-xs text-muted-foreground/70">
+          <div className="flex items-center gap-2 text-xs text-hsem-silver/40">
             <Globe className="h-3.5 w-3.5" />
             Vision : IA & Immersion 3D pour l&apos;Hotellerie Africaine
           </div>

@@ -50,14 +50,14 @@ export default function LoginPage() {
       <div className="absolute inset-0 bg-[url('/images/hero-hotel.jpg')] bg-cover bg-center opacity-5" />
 
       <div className="relative flex min-h-screen items-center justify-center px-4 py-12">
-        <Card className="glass-card w-full max-w-md border-border/50">
+        <Card className="glass-card w-full max-w-md border-hsem-silver/20">
           <CardHeader className="space-y-4 text-center">
             <div className="mx-auto flex justify-center">
               <HSEMLogo size="md" animated />
             </div>
             <div>
-              <CardTitle className="font-serif text-3xl text-primary">Connexion</CardTitle>
-              <CardDescription className="mt-2 text-muted-foreground">
+              <CardTitle className="font-serif text-3xl text-hsem-gold">Connexion</CardTitle>
+              <CardDescription className="mt-2 text-hsem-alabaster/70">
                 Accédez à votre espace HoteliaSEM
               </CardDescription>
             </div>
@@ -73,42 +73,42 @@ export default function LoginPage() {
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-foreground">
+                <Label htmlFor="email" className="text-hsem-alabaster">
                   Email
                 </Label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                  <Mail className="absolute left-3 top-3 h-4 w-4 text-hsem-silver/50" />
                   <Input
                     id="email"
                     type="email"
                     placeholder="votre@email.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="border-border bg-muted pl-10 text-foreground placeholder:text-muted-foreground"
+                    className="border-hsem-silver/20 bg-hsem-navy/40 pl-10 text-hsem-alabaster placeholder:text-hsem-silver/30"
                     required
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="password" className="text-foreground">
+                <Label htmlFor="password" className="text-hsem-alabaster">
                   Mot de passe
                 </Label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                  <Lock className="absolute left-3 top-3 h-4 w-4 text-hsem-silver/50" />
                   <Input
                     id="password"
                     type={showPassword ? 'text' : 'password'}
                     placeholder="••••••••"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="border-border bg-muted pl-10 pr-10 text-foreground placeholder:text-muted-foreground"
+                    className="border-hsem-silver/20 bg-hsem-navy/40 pl-10 pr-10 text-hsem-alabaster placeholder:text-hsem-silver/30"
                     required
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-3 text-muted-foreground hover:text-primary"
+                    className="absolute right-3 top-3 text-hsem-silver/50 hover:text-hsem-gold"
                   >
                     {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                   </button>
@@ -118,7 +118,7 @@ export default function LoginPage() {
               <div className="flex items-center justify-between text-sm">
                 <Link
                   href="/forgot-password"
-                  className="text-muted-foreground transition-colors hover:text-primary"
+                  className="text-hsem-silver/70 transition-colors hover:text-hsem-gold"
                 >
                   Mot de passe oublié ?
                 </Link>
@@ -126,7 +126,7 @@ export default function LoginPage() {
 
               <Button
                 type="submit"
-                className="w-full bg-primary font-semibold text-primary-foreground hover:bg-primary/90 hover:scale-105 transition-transform"
+                className="w-full bg-hsem-gold font-semibold text-hsem-navy hover:bg-hsem-gold/90"
                 disabled={isLoading}
               >
                 {isLoading ? 'Connexion...' : 'Se connecter'}
@@ -134,15 +134,15 @@ export default function LoginPage() {
             </form>
 
             {/* Demo Credentials */}
-            <div className="space-y-3 border-t border-border/50 pt-4">
-              <p className="text-center text-xs text-muted-foreground">Comptes de démonstration :</p>
+            <div className="space-y-3 border-t border-hsem-silver/10 pt-4">
+              <p className="text-center text-xs text-hsem-silver/60">Comptes de démonstration :</p>
               <div className="grid grid-cols-3 gap-2">
                 <Button
                   type="button"
                   variant="outline"
                   size="sm"
                   onClick={() => fillDemoCredentials('admin')}
-                  className="border-primary/30 text-xs text-primary hover:bg-primary/10 transition-all"
+                  className="border-hsem-gold/30 text-xs text-hsem-gold hover:bg-hsem-gold/10"
                 >
                   Admin
                 </Button>
@@ -151,7 +151,7 @@ export default function LoginPage() {
                   variant="outline"
                   size="sm"
                   onClick={() => fillDemoCredentials('hotelier')}
-                  className="border-border text-xs text-foreground hover:bg-accent transition-all"
+                  className="border-hsem-silver/30 text-xs text-hsem-silver hover:bg-hsem-silver/10"
                 >
                   Hôtelier
                 </Button>
@@ -160,7 +160,7 @@ export default function LoginPage() {
                   variant="outline"
                   size="sm"
                   onClick={() => fillDemoCredentials('client')}
-                  className="border-border text-xs text-foreground hover:bg-accent transition-all"
+                  className="border-hsem-alabaster/30 text-xs text-hsem-alabaster hover:bg-hsem-alabaster/10"
                 >
                   Client
                 </Button>
@@ -168,16 +168,16 @@ export default function LoginPage() {
             </div>
           </CardContent>
 
-          <CardFooter className="flex-col space-y-2 border-t border-border/50 pt-6">
-            <p className="text-center text-sm text-muted-foreground">
+          <CardFooter className="flex-col space-y-2 border-t border-hsem-silver/10 pt-6">
+            <p className="text-center text-sm text-hsem-alabaster/70">
               Pas encore de compte ?{' '}
-              <Link href="/register" className="font-semibold text-primary transition-colors hover:text-primary/80">
+              <Link href="/register" className="font-semibold text-hsem-gold transition-colors hover:text-hsem-gold/80">
                 Créer un compte
               </Link>
             </p>
             <Link
               href="/"
-              className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+              className="text-xs text-hsem-silver/60 transition-colors hover:text-hsem-silver"
             >
               ← Retour à l'accueil
             </Link>

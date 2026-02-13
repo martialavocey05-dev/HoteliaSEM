@@ -62,11 +62,11 @@ const config: Config = {
           ring: 'hsl(var(--sidebar-ring))',
         },
         hsem: {
-          gold: '#D4AF37',
-          silver: '#C0C0C0',
-          navy: '#001F3F',
-          deep: '#001020',
-          alabaster: '#F2EDE4',
+          gold: 'hsl(var(--hsem-gold))',
+          silver: 'hsl(var(--hsem-silver))',
+          navy: 'hsl(var(--hsem-navy))',
+          deep: 'hsl(var(--hsem-deep))',
+          alabaster: 'hsl(var(--hsem-alabaster))',
         },
       },
       fontFamily: {

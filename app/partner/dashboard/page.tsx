@@ -49,7 +49,10 @@ export default function PartnerDashboardPage() {
         {/* Header */}
         <header className="glass border-b border-hsem-silver/10">
           <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-            <div className="flex items-center gap-3">
+            <button
+              onClick={() => router.push('/')}
+              className="flex items-center gap-3 transition-transform hover:scale-105"
+            >
               <HSEMLogo size="sm" />
               <div>
                 <span className="font-serif text-xl font-bold text-hsem-gold">HoteliaSEM</span>
@@ -57,7 +60,7 @@ export default function PartnerDashboardPage() {
                   Partenaire
                 </span>
               </div>
-            </div>
+            </button>
             <Button
               variant="outline"
               size="sm"
@@ -146,7 +149,10 @@ export default function PartnerDashboardPage() {
                   <p className="mb-4 text-sm text-hsem-alabaster/70">
                     Vous n'avez pas encore ajouté d'hôtel
                   </p>
-                  <Button className="bg-hsem-gold text-hsem-navy hover:bg-hsem-gold/90">
+                  <Button
+                    onClick={() => router.push('/partner/hotels/add')}
+                    className="bg-hsem-gold text-hsem-navy hover:bg-hsem-gold/90 hover:scale-105 transition-transform"
+                  >
                     <PlusCircle className="mr-2 h-4 w-4" />
                     Ajouter un hôtel
                   </Button>
@@ -198,7 +204,11 @@ export default function PartnerDashboardPage() {
                   <p className="text-hsem-alabaster">Hôtelier</p>
                 </div>
               </div>
-              <Button variant="outline" className="mt-4 border-hsem-silver/20 text-hsem-alabaster">
+              <Button
+                onClick={() => router.push('/partner/profile')}
+                variant="outline"
+                className="mt-4 border-hsem-silver/20 text-hsem-alabaster hover:bg-hsem-gold/10 hover:text-hsem-gold transition-all"
+              >
                 <Settings className="mr-2 h-4 w-4" />
                 Modifier le profil
               </Button>

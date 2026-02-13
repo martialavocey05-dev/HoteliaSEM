@@ -34,13 +34,13 @@ export function HeroSection() {
 
       <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center px-6 pt-24 text-center">
         {/* Logo */}
-        <div className="mb-8">
+        <div className="mb-8 animate-bounce-in">
           <HSEMLogo size="xl" animated />
         </div>
 
         {/* Badge */}
-        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-hsem-gold/30 bg-hsem-gold/10 px-5 py-2 animate-fade-in-up">
-          <Star className="h-4 w-4 text-hsem-gold" />
+        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-hsem-gold/30 bg-hsem-gold/10 px-5 py-2 animate-fade-in-up animate-glow-pulse">
+          <Star className="h-4 w-4 text-hsem-gold animate-silver-float" />
           <span className="text-sm font-medium text-hsem-gold">
             Plateforme Hoteliere N.1 au Cameroun
           </span>
@@ -86,7 +86,7 @@ export function HeroSection() {
 
         {/* Stats */}
         <div
-          className="grid w-full max-w-3xl grid-cols-3 gap-6 rounded-2xl border border-hsem-silver/10 bg-hsem-navy/50 p-6 backdrop-blur-md animate-fade-in-up"
+          className="grid w-full max-w-3xl grid-cols-3 gap-6 rounded-2xl border border-hsem-silver/10 bg-hsem-navy/50 p-6 backdrop-blur-md animate-scale-in"
           style={{ animationDelay: "0.8s" }}
         >
           <div className="flex flex-col items-center gap-2">

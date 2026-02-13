@@ -15,6 +15,7 @@ const footerLinks = {
     { label: "Dashboard Hotelier", href: "/partner/dashboard" },
     { label: "Espace Client", href: "/client/account" },
     { label: "Connexion", href: "/login" },
+    { label: "Comptes Demo", href: "/credentials" },
   ],
   legal: [
     { label: "Mentions Legales", href: "#" },

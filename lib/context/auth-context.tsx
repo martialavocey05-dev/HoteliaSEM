@@ -23,29 +23,41 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     // Check for stored auth on mount
+    console.log('[v0] AuthProvider: Checking stored auth on mount')
     const storedUser = localStorage.getItem('hsem_user')
     const storedToken = localStorage.getItem('hsem_token')
     
+    console.log('[v0] AuthProvider: storedUser exists?', !!storedUser)
+    console.log('[v0] AuthProvider: storedToken exists?', !!storedToken)
+    
     if (storedUser && storedToken) {
-      setUser(JSON.parse(storedUser))
+      const parsedUser = JSON.parse(storedUser)
+      console.log('[v0] AuthProvider: Restoring user session for', parsedUser.email)
+      setUser(parsedUser)
+    } else {
+      console.log('[v0] AuthProvider: No stored session found')
     }
     setIsLoading(false)
   }, [])
 
   const login = async (credentials: LoginCredentials) => {
     try {
+      console.log('[v0] Login: Attempting login for', credentials.email)
       // Simulate API call with mock data
       const foundUser = findUserByEmail(credentials.email)
       
       if (!foundUser) {
+        console.log('[v0] Login: User not found')
         throw new Error('Email non trouvé')
       }
 
       if (foundUser.password !== credentials.password) {
+        console.log('[v0] Login: Invalid password')
         throw new Error('Mot de passe incorrect')
       }
 
       if (!foundUser.isActive) {
+        console.log('[v0] Login: Account inactive')
         throw new Error('Compte désactivé. Contactez le support.')
       }
 
@@ -55,16 +67,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       // Simulate token generation
       const mockToken = `hsem_token_${userWithoutPassword.id}_${Date.now()}`
       
+      console.log('[v0] Login: Storing user in localStorage', userWithoutPassword.email)
       // Store in localStorage
       localStorage.setItem('hsem_user', JSON.stringify(userWithoutPassword))
       localStorage.setItem('hsem_token', mockToken)
       
+      console.log('[v0] Login: Setting user state')
       setUser(userWithoutPassword)
 
       // Redirect based on role
       const dashboard = ROLE_DASHBOARDS[userWithoutPassword.role]
+      console.log('[v0] Login: Redirecting to', dashboard)
       router.push(dashboard)
     } catch (error) {
+      console.log('[v0] Login: Error occurred', error)
       throw error
     }
   }
@@ -107,6 +123,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   const logout = () => {
+    console.log('[v0] Logout: Logging out user')
     localStorage.removeItem('hsem_user')
     localStorage.removeItem('hsem_token')
     setUser(null)

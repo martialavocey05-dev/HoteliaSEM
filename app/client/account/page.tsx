@@ -6,19 +6,36 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { HSEMLogo } from '@/components/hsem-logo'
-import { Calendar, CreditCard, Heart, LogOut, Settings, User } from 'lucide-react'
+import { Calendar, CreditCard, Heart, LogOut, Settings, User, Building2, Sparkles, ArrowRight } from 'lucide-react'
 
 export default function ClientAccountPage() {
-  const { user, isAuthenticated, logout } = useAuth()
+  const { user, isAuthenticated, isLoading, logout } = useAuth()
   const router = useRouter()
 
   useEffect(() => {
+    console.log('[v0] ClientAccount: Auth state', { isAuthenticated, isLoading, userRole: user?.role })
+    if (isLoading) {
+      return
+    }
     if (!isAuthenticated) {
+      console.log('[v0] ClientAccount: Not authenticated, redirecting to login')
       router.push('/login')
     } else if (user?.role !== 'client') {
+      console.log('[v0] ClientAccount: Wrong role, redirecting to home')
       router.push('/')
     }
-  }, [isAuthenticated, user, router])
+  }, [isAuthenticated, isLoading, user, router])
+
+  if (isLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background">
+        <div className="text-center">
+          <HSEMLogo size="md" animated />
+          <p className="mt-4 text-hsem-gold">Chargement...</p>
+        </div>
+      </div>
+    )
+  }
 
   if (!user || user.role !== 'client') {
     return null
@@ -60,76 +77,101 @@ export default function ClientAccountPage() {
           </div>
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            <Card className="glass-card border-hsem-silver/20">
+            <Card className="glass-card border-hsem-silver/20 hover:border-primary/50 transition-all duration-300 animate-scale-in group">
               <CardHeader>
-                <User className="mb-2 h-8 w-8 text-hsem-gold" />
+                <div className="rounded-full bg-primary/10 p-3 w-fit mb-2 group-hover:scale-110 transition-transform">
+                  <User className="h-8 w-8 text-primary" />
+                </div>
                 <CardTitle className="text-hsem-gold">Mon Profil</CardTitle>
-                <CardDescription className="text-hsem-alabaster/70">
+                <CardDescription className="text-foreground/70">
                   Gérez vos informations personnelles
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="space-y-2 text-sm text-hsem-alabaster/90">
+                <div className="space-y-2 text-sm text-foreground/90">
                   <p><strong>Email:</strong> {user.email}</p>
                   <p><strong>Téléphone:</strong> {user.phone}</p>
-                  <p><strong>Type:</strong> Client</p>
+                  <p><strong>Type:</strong> Client Premium</p>
                 </div>
-                <Button className="mt-4 w-full bg-hsem-gold/10 text-hsem-gold hover:bg-hsem-gold/20">
+                <Button
+                  onClick={() => router.push('/client/profile')}
+                  className="mt-4 w-full bg-primary/10 text-primary hover:bg-primary/20 border border-primary/20 hover:scale-105 transition-transform"
+                >
                   <Settings className="mr-2 h-4 w-4" />
-                  Modifier
+                  Modifier mon profil
                 </Button>
               </CardContent>
             </Card>
 
-            <Card className="glass-card border-hsem-silver/20">
+            <Card className="glass-card border-hsem-silver/20 hover:border-primary/50 transition-all duration-300 animate-scale-in group" style={{ animationDelay: '0.1s' }}>
               <CardHeader>
-                <Calendar className="mb-2 h-8 w-8 text-hsem-silver" />
+                <div className="rounded-full bg-blue-500/10 p-3 w-fit mb-2 group-hover:scale-110 transition-transform">
+                  <Calendar className="h-8 w-8 text-blue-500" />
+                </div>
                 <CardTitle className="text-hsem-gold">Mes Réservations</CardTitle>
-                <CardDescription className="text-hsem-alabaster/70">
+                <CardDescription className="text-foreground/70">
                   Consultez vos séjours à venir
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="mb-4 text-sm text-hsem-alabaster/70">
+                <p className="mb-4 text-sm text-foreground/70">
                   Vous n'avez pas encore de réservation
                 </p>
-                <Button className="w-full bg-hsem-gold text-hsem-navy hover:bg-hsem-gold/90">
+                <Button
+                  onClick={() => router.push('/client/hotels')}
+                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-105 transition-transform group/btn"
+                >
+                  <Building2 className="mr-2 h-4 w-4" />
                   Réserver maintenant
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                 </Button>
               </CardContent>
             </Card>
 
-            <Card className="glass-card border-hsem-silver/20">
+            <Card className="glass-card border-hsem-silver/20 hover:border-red-500/50 transition-all duration-300 animate-scale-in group" style={{ animationDelay: '0.2s' }}>
               <CardHeader>
-                <Heart className="mb-2 h-8 w-8 text-red-400" />
+                <div className="rounded-full bg-red-500/10 p-3 w-fit mb-2 group-hover:scale-110 transition-transform">
+                  <Heart className="h-8 w-8 text-red-500 animate-glow-pulse" />
+                </div>
                 <CardTitle className="text-hsem-gold">Favoris</CardTitle>
-                <CardDescription className="text-hsem-alabaster/70">
+                <CardDescription className="text-foreground/70">
                   Vos hôtels préférés
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="mb-4 text-sm text-hsem-alabaster/70">
+                <p className="mb-4 text-sm text-foreground/70">
                   Aucun favori pour le moment
                 </p>
-                <Button variant="outline" className="w-full border-hsem-silver/20 text-hsem-alabaster">
+                <Button
+                  onClick={() => router.push('/client/favorites')}
+                  variant="outline"
+                  className="w-full border-border text-foreground hover:bg-accent hover:scale-105 transition-transform group/btn"
+                >
+                  <Sparkles className="mr-2 h-4 w-4" />
                   Découvrir
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                 </Button>
               </CardContent>
             </Card>
 
-            <Card className="glass-card border-hsem-silver/20">
+            <Card className="glass-card border-hsem-silver/20 hover:border-primary/50 transition-all duration-300 animate-scale-in group" style={{ animationDelay: '0.3s' }}>
               <CardHeader>
-                <CreditCard className="mb-2 h-8 w-8 text-hsem-silver" />
+                <div className="rounded-full bg-green-500/10 p-3 w-fit mb-2 group-hover:scale-110 transition-transform">
+                  <CreditCard className="h-8 w-8 text-green-500" />
+                </div>
                 <CardTitle className="text-hsem-gold">Moyens de paiement</CardTitle>
-                <CardDescription className="text-hsem-alabaster/70">
+                <CardDescription className="text-foreground/70">
                   Gérez vos cartes enregistrées
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="mb-4 text-sm text-hsem-alabaster/70">
+                <p className="mb-4 text-sm text-foreground/70">
                   Aucune carte enregistrée
                 </p>
-                <Button variant="outline" className="w-full border-hsem-silver/20 text-hsem-alabaster">
+                <Button
+                  variant="outline"
+                  className="w-full border-border text-foreground hover:bg-accent hover:scale-105 transition-transform"
+                >
                   Ajouter une carte
                 </Button>
               </CardContent>

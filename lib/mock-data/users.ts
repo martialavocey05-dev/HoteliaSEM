@@ -1,6 +1,9 @@
-import { User } from '@/lib/types/auth'
+import { User, UserRole } from '@/lib/types/auth'
 
-export const MOCK_USERS: Array<User & { password: string }> = [
+export type UserWithPassword = User & { password: string }
+
+// Mutable users array (simulates a database)
+let mockUsers: UserWithPassword[] = [
   // Administrateurs
   {
     id: 'admin-001',
@@ -26,7 +29,7 @@ export const MOCK_USERS: Array<User & { password: string }> = [
     isActive: true,
   },
 
-  // Hôteliers
+  // Hoteliers
   {
     id: 'hotelier-001',
     email: 'hotel.meridien@hsem.cm',
@@ -65,7 +68,7 @@ export const MOCK_USERS: Array<User & { password: string }> = [
     id: 'hotelier-004',
     email: 'plaza.douala@hsem.cm',
     password: 'PlazaDla2024!',
-    firstName: 'Françoise',
+    firstName: 'Francoise',
     lastName: 'Ngo Balla',
     phone: '+237699567890',
     role: 'hotelier',
@@ -89,7 +92,7 @@ export const MOCK_USERS: Array<User & { password: string }> = [
     id: 'client-002',
     email: 'amelie.fotso@gmail.com',
     password: 'Amelie@2024',
-    firstName: 'Amélie',
+    firstName: 'Amelie',
     lastName: 'Fotso',
     phone: '+237699678901',
     role: 'client',
@@ -133,7 +136,7 @@ export const MOCK_USERS: Array<User & { password: string }> = [
     id: 'client-006',
     email: 'celine.moukouri@hotmail.fr',
     password: 'Celine@2024Pass',
-    firstName: 'Céline',
+    firstName: 'Celine',
     lastName: 'Moukouri',
     phone: '+237699012345',
     role: 'client',
@@ -142,6 +145,9 @@ export const MOCK_USERS: Array<User & { password: string }> = [
   },
 ]
 
+// Keep MOCK_USERS as a getter for backward compatibility
+export const MOCK_USERS = mockUsers
+
 export const ROLE_DASHBOARDS = {
   admin: '/admin/dashboard',
   hotelier: '/partner/dashboard',
@@ -149,9 +155,47 @@ export const ROLE_DASHBOARDS = {
 } as const
 
 export const findUserByEmail = (email: string) => {
-  return MOCK_USERS.find((user) => user.email.toLowerCase() === email.toLowerCase())
+  return mockUsers.find((user) => user.email.toLowerCase() === email.toLowerCase())
 }
 
-export const getUsersByRole = (role: User['role']) => {
-  return MOCK_USERS.filter((user) => user.role === role)
+export const getUsersByRole = (role: UserRole) => {
+  return mockUsers.filter((user) => user.role === role)
+}
+
+// --- Admin Management Functions ---
+
+/**
+ * Deactivate a user by ID. Prevents admins from being deactivated.
+ * Returns true on success, false on failure.
+ */
+export const deactivateUser = (userId: string): boolean => {
+  const user = mockUsers.find((u) => u.id === userId)
+  if (!user || user.role === 'admin') return false
+  user.isActive = false
+  return true
+}
+
+/**
+ * Reactivate a user by ID. Prevents admins from being modified.
+ * Returns true on success, false on failure.
+ */
+export const reactivateUser = (userId: string): boolean => {
+  const user = mockUsers.find((u) => u.id === userId)
+  if (!user || user.role === 'admin') return false
+  user.isActive = true
+  return true
+}
+
+/**
+ * Delete a user by ID. Prevents admins from being deleted.
+ * Returns true on success, false on failure.
+ */
+export const deleteUser = (userId: string): boolean => {
+  const user = mockUsers.find((u) => u.id === userId)
+  if (!user || user.role === 'admin') return false
+  mockUsers = mockUsers.filter((u) => u.id !== userId)
+  // Update the exported reference
+  MOCK_USERS.length = 0
+  MOCK_USERS.push(...mockUsers)
+  return true
 }

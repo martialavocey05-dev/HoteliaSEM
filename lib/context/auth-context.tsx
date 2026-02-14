@@ -1,7 +1,7 @@
 'use client'
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
-import { User, LoginCredentials, RegisterData, AuthResponse } from '@/lib/types/auth'
+import { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react'
+import { User, LoginCredentials, RegisterData } from '@/lib/types/auth'
 import { findUserByEmail, ROLE_DASHBOARDS } from '@/lib/mock-data/users'
 import { useRouter } from 'next/navigation'
 
@@ -12,6 +12,7 @@ interface AuthContextType {
   login: (credentials: LoginCredentials) => Promise<void>
   register: (data: RegisterData) => Promise<void>
   logout: () => void
+  forceDisconnect: (userId: string) => void
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -22,78 +23,53 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const router = useRouter()
 
   useEffect(() => {
-    // Check for stored auth on mount
-    console.log('[v0] AuthProvider: Checking stored auth on mount')
     const storedUser = localStorage.getItem('hsem_user')
     const storedToken = localStorage.getItem('hsem_token')
-    
-    console.log('[v0] AuthProvider: storedUser exists?', !!storedUser)
-    console.log('[v0] AuthProvider: storedToken exists?', !!storedToken)
-    
+
     if (storedUser && storedToken) {
       const parsedUser = JSON.parse(storedUser)
-      console.log('[v0] AuthProvider: Restoring user session for', parsedUser.email)
       setUser(parsedUser)
-    } else {
-      console.log('[v0] AuthProvider: No stored session found')
     }
     setIsLoading(false)
   }, [])
 
   const login = async (credentials: LoginCredentials) => {
     try {
-      console.log('[v0] Login: Attempting login for', credentials.email)
-      // Simulate API call with mock data
       const foundUser = findUserByEmail(credentials.email)
-      
+
       if (!foundUser) {
-        console.log('[v0] Login: User not found')
-        throw new Error('Email non trouvé')
+        throw new Error('Email non trouve')
       }
 
       if (foundUser.password !== credentials.password) {
-        console.log('[v0] Login: Invalid password')
         throw new Error('Mot de passe incorrect')
       }
 
       if (!foundUser.isActive) {
-        console.log('[v0] Login: Account inactive')
-        throw new Error('Compte désactivé. Contactez le support.')
+        throw new Error('Compte desactive. Contactez le support.')
       }
 
-      // Remove password from user object
       const { password, ...userWithoutPassword } = foundUser
-
-      // Simulate token generation
       const mockToken = `hsem_token_${userWithoutPassword.id}_${Date.now()}`
-      
-      console.log('[v0] Login: Storing user in localStorage', userWithoutPassword.email)
-      // Store in localStorage
+
       localStorage.setItem('hsem_user', JSON.stringify(userWithoutPassword))
       localStorage.setItem('hsem_token', mockToken)
-      
-      console.log('[v0] Login: Setting user state')
       setUser(userWithoutPassword)
 
-      // Redirect based on role
       const dashboard = ROLE_DASHBOARDS[userWithoutPassword.role]
-      console.log('[v0] Login: Redirecting to', dashboard)
       router.push(dashboard)
     } catch (error) {
-      console.log('[v0] Login: Error occurred', error)
       throw error
     }
   }
 
   const register = async (data: RegisterData) => {
     try {
-      // Check if email already exists
       const existingUser = findUserByEmail(data.email)
       if (existingUser) {
-        throw new Error('Cet email est déjà utilisé')
+        throw new Error('Cet email est deja utilise')
       }
 
-      // Create new user
       const newUser: User = {
         id: `user-${Date.now()}`,
         email: data.email,
@@ -105,16 +81,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         isActive: true,
       }
 
-      // Simulate token generation
       const mockToken = `hsem_token_${newUser.id}_${Date.now()}`
-      
-      // Store in localStorage
       localStorage.setItem('hsem_user', JSON.stringify(newUser))
       localStorage.setItem('hsem_token', mockToken)
-      
       setUser(newUser)
 
-      // Redirect based on role
       const dashboard = ROLE_DASHBOARDS[newUser.role]
       router.push(dashboard)
     } catch (error) {
@@ -122,13 +93,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }
 
-  const logout = () => {
-    console.log('[v0] Logout: Logging out user')
+  const logout = useCallback(() => {
     localStorage.removeItem('hsem_user')
     localStorage.removeItem('hsem_token')
     setUser(null)
     router.push('/')
-  }
+  }, [router])
+
+  /**
+   * Force disconnect a specific user by their ID.
+   * If the currently logged-in user matches the given ID, they are logged out immediately.
+   */
+  const forceDisconnect = useCallback(
+    (userId: string) => {
+      if (user && user.id === userId) {
+        logout()
+      }
+    },
+    [user, logout]
+  )
 
   return (
     <AuthContext.Provider
@@ -139,6 +122,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         login,
         register,
         logout,
+        forceDisconnect,
       }}
     >
       {children}

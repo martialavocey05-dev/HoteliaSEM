@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { HSEMLogo } from '@/components/hsem-logo'
 import { ArrowLeft, MapPin, Star, Wifi, Car, UtensilsCrossed, Waves, Heart, Calendar } from 'lucide-react'
 import Image from 'next/image'
+import { ChatbotWidget } from '@/components/chatbot-widget'
 
 const hotels = [
   {
@@ -228,6 +229,7 @@ export default function ClientHotelsPage() {
           </div>
         </main>
       </div>
+      <ChatbotWidget />
     </div>
   )
 }

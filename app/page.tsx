@@ -1,11 +1,13 @@
 import { Navbar } from "@/components/navbar"
 import { HeroSection } from "@/components/hero-section"
+import { StatsSection } from "@/components/stats-section"
 import { DestinationsSection } from "@/components/destinations-section"
 import { ServicesSection } from "@/components/services-section"
 import { ArchitectureSection } from "@/components/architecture-section"
 import { SQLSection } from "@/components/sql-section"
 import { Footer } from "@/components/footer"
 import { GoldenParticlesWrapper } from "@/components/golden-particles-wrapper"
+import { ChatbotWidget } from "@/components/chatbot-widget"
 
 export default function Page() {
   return (
@@ -13,11 +15,13 @@ export default function Page() {
       <GoldenParticlesWrapper />
       <Navbar />
       <HeroSection />
+      <StatsSection />
       <DestinationsSection />
       <ServicesSection />
       <ArchitectureSection />
       <SQLSection />
       <Footer />
+      <ChatbotWidget />
     </main>
   )
 }

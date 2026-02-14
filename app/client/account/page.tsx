@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { HSEMLogo } from '@/components/hsem-logo'
 import { Calendar, CreditCard, Heart, LogOut, Settings, User, Building2, Sparkles, ArrowRight } from 'lucide-react'
+import { ChatbotWidget } from '@/components/chatbot-widget'
 
 export default function ClientAccountPage() {
   const { user, isAuthenticated, isLoading, logout } = useAuth()
@@ -179,6 +180,7 @@ export default function ClientAccountPage() {
           </div>
         </main>
       </div>
+      <ChatbotWidget />
     </div>
   )
 }

@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { HSEMLogo } from "./hsem-logo"
-import { ArrowDown, Star, MapPin, Shield } from "lucide-react"
+import { ArrowDown, Star } from "lucide-react"
 
 export function HeroSection() {
   return (
@@ -84,33 +84,7 @@ export function HeroSection() {
           </a>
         </div>
 
-        {/* Stats */}
-        <div
-          className="grid w-full max-w-3xl grid-cols-3 gap-6 rounded-2xl border border-border/50 bg-card/50 p-6 backdrop-blur-md animate-scale-in"
-          style={{ animationDelay: "0.8s" }}
-        >
-          <div className="flex flex-col items-center gap-2">
-            <MapPin className="h-5 w-5 text-primary" />
-            <span className="font-serif text-2xl font-bold text-foreground md:text-3xl">
-              3+
-            </span>
-            <span className="text-xs text-muted-foreground">Villes Couvertes</span>
-          </div>
-          <div className="flex flex-col items-center gap-2 border-x border-border/50">
-            <Star className="h-5 w-5 text-primary" />
-            <span className="font-serif text-2xl font-bold text-foreground md:text-3xl">
-              5*
-            </span>
-            <span className="text-xs text-muted-foreground">Hotels de Luxe</span>
-          </div>
-          <div className="flex flex-col items-center gap-2">
-            <Shield className="h-5 w-5 text-primary" />
-            <span className="font-serif text-2xl font-bold text-foreground md:text-3xl">
-              24/7
-            </span>
-            <span className="text-xs text-muted-foreground">Concierge IA</span>
-          </div>
-        </div>
+
       </div>
     </section>
   )

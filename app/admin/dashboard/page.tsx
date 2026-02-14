@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useAuth } from '@/lib/context/auth-context'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
@@ -15,12 +15,17 @@ import {
   Users,
   FileText,
   Settings,
+  Lock,
 } from 'lucide-react'
 import { getUsersByRole } from '@/lib/mock-data/users'
+import { UserManagementDialog } from '@/components/user-management-dialog'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
+import type { UserRole } from '@/lib/types/auth'
 
 export default function AdminDashboardPage() {
   const { user, isAuthenticated, isLoading, logout } = useAuth()
   const router = useRouter()
+  const [managingRole, setManagingRole] = useState<Exclude<UserRole, 'admin'> | null>(null)
 
   useEffect(() => {
     console.log('[v0] AdminDashboard: Auth state', { isAuthenticated, isLoading, userRole: user?.role })
@@ -172,31 +177,70 @@ export default function AdminDashboardPage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center justify-between rounded-lg border border-hsem-silver/10 p-4">
-                  <div>
-                    <p className="font-medium text-hsem-alabaster">Clients</p>
-                    <p className="text-sm text-hsem-alabaster/60">{stats.clients} comptes actifs</p>
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-500/10">
+                      <Users className="h-4 w-4 text-blue-400" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-hsem-alabaster">Clients</p>
+                      <p className="text-sm text-hsem-alabaster/60">{stats.clients} comptes actifs</p>
+                    </div>
                   </div>
-                  <Button size="sm" variant="outline" className="border-hsem-silver/20 text-hsem-alabaster">
-                    Gérer
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="border-hsem-silver/20 text-hsem-alabaster hover:bg-primary/10 hover:text-primary hover:border-primary/30"
+                    onClick={() => setManagingRole('client')}
+                  >
+                    Gerer
                   </Button>
                 </div>
                 <div className="flex items-center justify-between rounded-lg border border-hsem-silver/10 p-4">
-                  <div>
-                    <p className="font-medium text-hsem-alabaster">Hôteliers</p>
-                    <p className="text-sm text-hsem-alabaster/60">{stats.hoteliers} partenaires</p>
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-amber-500/10">
+                      <Building2 className="h-4 w-4 text-amber-400" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-hsem-alabaster">Hoteliers</p>
+                      <p className="text-sm text-hsem-alabaster/60">{stats.hoteliers} partenaires</p>
+                    </div>
                   </div>
-                  <Button size="sm" variant="outline" className="border-hsem-silver/20 text-hsem-alabaster">
-                    Gérer
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="border-hsem-silver/20 text-hsem-alabaster hover:bg-primary/10 hover:text-primary hover:border-primary/30"
+                    onClick={() => setManagingRole('hotelier')}
+                  >
+                    Gerer
                   </Button>
                 </div>
-                <div className="flex items-center justify-between rounded-lg border border-hsem-gold/20 p-4">
-                  <div>
-                    <p className="font-medium text-hsem-gold">Administrateurs</p>
-                    <p className="text-sm text-hsem-alabaster/60">{stats.admins} admins</p>
+                <div className="flex items-center justify-between rounded-lg border border-hsem-gold/20 bg-primary/5 p-4">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10">
+                      <Shield className="h-4 w-4 text-primary" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-hsem-gold">Administrateurs</p>
+                      <p className="text-sm text-hsem-alabaster/60">{stats.admins} admins</p>
+                    </div>
                   </div>
-                  <Button size="sm" className="bg-hsem-gold/20 text-hsem-gold hover:bg-hsem-gold/30">
-                    Gérer
-                  </Button>
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          size="sm"
+                          disabled
+                          className="bg-hsem-gold/10 text-hsem-gold/50 cursor-not-allowed"
+                        >
+                          <Lock className="mr-1.5 h-3 w-3" />
+                          Protege
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent side="left" className="bg-card text-foreground border-border">
+                        <p>Impossible de gerer les administrateurs</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
                 </div>
               </CardContent>
             </Card>
@@ -241,17 +285,28 @@ export default function AdminDashboardPage() {
 
           <Card className="glass-card mt-6 border-hsem-silver/20">
             <CardHeader>
-              <CardTitle className="text-hsem-gold">Configuration système</CardTitle>
+              <CardTitle className="text-hsem-gold">Configuration systeme</CardTitle>
             </CardHeader>
             <CardContent>
               <Button variant="outline" className="border-hsem-silver/20 text-hsem-alabaster">
                 <Settings className="mr-2 h-4 w-4" />
-                Paramètres globaux
+                Parametres globaux
               </Button>
             </CardContent>
           </Card>
         </main>
       </div>
+
+      {/* User Management Dialog */}
+      {managingRole && (
+        <UserManagementDialog
+          open={!!managingRole}
+          onOpenChange={(open) => {
+            if (!open) setManagingRole(null)
+          }}
+          role={managingRole}
+        />
+      )}
     </div>
   )
 }
